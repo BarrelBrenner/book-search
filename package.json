@@ -10,16 +10,19 @@
     "install": "cd server && npm i && cd ../client && npm i",
     "heroku-postbuild": "cd client && npm run build"
   },
+  
   "repository": {
-    "type": "git"
+    "type": "git",
+    "url": "git+https://github.com/BarrelBrenner/book-search.git"
   },
-
+  
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^5.3.0"
   },
+  
   "dependencies": {
     "if-env": "^1.0.4"
   }
