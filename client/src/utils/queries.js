@@ -9,12 +9,11 @@ export const QUERY_ME = gql`
       savedBooks {
         bookId
         authors
+        image
         description
         title
-        image
         link
       }
-      bookCount
     }
   }
 `;
