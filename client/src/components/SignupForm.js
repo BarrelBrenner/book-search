@@ -1,29 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
-
 import { useMutation } from "@apollo/react-hooks";
-import { ADD_USER } from "../utils/mutations";
+import { NEW_GUEST } from "../utils/mutations";
 import Auth from "../utils/auth";
 
 const SignupForm = () => {
-  // set initial form state
   const [userFormData, setUserFormData] = useState({
     username: "",
     email: "",
     password: "",
   });
-  // set state for form validation
   const [validated] = useState(false);
-  // set state for alert
   const [showAlert, setShowAlert] = useState(false);
-
-  const [addUser, { error }] = useMutation(ADD_USER);
+  const [addUser, { error }] = useMutation(NEW_GUEST);
 
   useEffect(() => {
-    if (error) {
-      setShowAlert(true);
-    } else {
-      setShowAlert(false);
+    if (error) {setShowAlert(true);
+    } else {setShowAlert(false);
     }
   }, [error]);
 
@@ -70,7 +63,7 @@ const SignupForm = () => {
           show={showAlert}
           variant="danger"
         >
-          Something went wrong with your signup!
+          There was a hiccup with your signup, please try again.
         </Alert>
 
         <Form.Group>
@@ -84,7 +77,7 @@ const SignupForm = () => {
             required
           />
           <Form.Control.Feedback type="invalid">
-            Username is required!
+            A Username is needed, please type one in at this time.
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -99,7 +92,7 @@ const SignupForm = () => {
             required
           />
           <Form.Control.Feedback type="invalid">
-            Email is required!
+            An Email is needed, please type one in at this time.
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -114,7 +107,7 @@ const SignupForm = () => {
             required
           />
           <Form.Control.Feedback type="invalid">
-            Password is required!
+            A Password is needed, please type one in at this time.
           </Form.Control.Feedback>
         </Form.Group>
         <Button

@@ -13,7 +13,7 @@ const resolvers = {
         return userData;
       }
 
-      throw new AuthenticationError("Not logged in");
+      throw new AuthenticationError("You are not logged in at this time");
     },
   },
 
@@ -28,13 +28,13 @@ const resolvers = {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw new AuthenticationError("Incorrect credentials");
+        throw new AuthenticationError("Your information does not match what is in database.");
       }
 
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw new AuthenticationError("Incorrect credentials");
+        throw new AuthenticationError("Your information does not match what is in database.");
       }
 
       const token = signToken(user);
@@ -51,7 +51,7 @@ const resolvers = {
         return updatedUser;
       }
 
-      throw new AuthenticationError("You need to be logged in!");
+      throw new AuthenticationError("Please login at this time.");
     },
     removeBook: async (parent, { bookId }, context) => {
       if (context.user) {
@@ -64,7 +64,7 @@ const resolvers = {
         return updatedUser;
       }
 
-      throw new AuthenticationError("You need to be logged in!");
+      throw new AuthenticationError("Please login at this time.");
     },
   },
 };

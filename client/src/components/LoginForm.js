@@ -1,22 +1,19 @@
 // see SignupForm.js for comments
 import React, { useState, useEffect } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
-
 import { useMutation } from "@apollo/react-hooks";
-import { LOGIN_USER } from "../utils/mutations";
+import { WELCOME_HOME } from "../utils/mutations";
 import Auth from "../utils/auth";
 
 const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ email: "", password: "" });
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
-  const [login, { error }] = useMutation(LOGIN_USER);
+  const [login, { error }] = useMutation(WELCOME_HOME);
 
   useEffect(() => {
-    if (error) {
-      setShowAlert(true);
-    } else {
-      setShowAlert(false);
+    if (error) {setShowAlert(true);
+    } else {setShowAlert(false);
     }
   }, [error]);
 
@@ -35,8 +32,7 @@ const LoginForm = () => {
       event.stopPropagation();
     }
 
-    try {
-      const { data } = await login({
+    try {const { data } = await login({
         variables: { ...userFormData },
       });
 
@@ -46,7 +42,6 @@ const LoginForm = () => {
       console.error(e);
     }
 
-    // clear form values
     setUserFormData({
       email: "",
       password: "",
@@ -62,7 +57,7 @@ const LoginForm = () => {
           show={showAlert}
           variant="danger"
         >
-          Something went wrong with your login credentials!
+          Your login information is either incorrect or has changed.
         </Alert>
         <Form.Group>
           <Form.Label htmlFor="email">Email</Form.Label>
@@ -75,7 +70,7 @@ const LoginForm = () => {
             required
           />
           <Form.Control.Feedback type="invalid">
-            Email is required!
+            An Email address is needed, please type in one at this time.
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -90,7 +85,7 @@ const LoginForm = () => {
             required
           />
           <Form.Control.Feedback type="invalid">
-            Password is required!
+            A Password is needed, please type one in at this time.
           </Form.Control.Feedback>
         </Form.Group>
         <Button
